@@ -6,6 +6,11 @@ FROM rocker/shiny:latest
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get clean
+    
+## add any R packages here 
+RUN install2.r tidyverse DBI odbc lubridate\
+    ## clean up
+    && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 # The . and /srv/shiny-server/ are two different arguments that relate to your local file and the 
 # file path in the container; not to be read as one string. 
