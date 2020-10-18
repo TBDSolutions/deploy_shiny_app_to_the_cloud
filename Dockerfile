@@ -1,6 +1,11 @@
 # This can change with the whatever version of R the app was built
 # sets the base image and OS on which the entire computer will be built
-FROM rocker/shiny:3.3
+FROM rocker/shiny:latest
+
+## update system libraries
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get clean
 
 # The . and /srv/shiny-server/ are two different arguments that relate to your local file and the 
 # file path in the container; not to be read as one string. 
@@ -14,4 +19,4 @@ COPY /app /srv/shiny-server/
 # so when the docker starts port 3838 is exposed. 
 EXPOSE 3838
 # Required for shiny server 
-USER shiny
+#USER shiny
